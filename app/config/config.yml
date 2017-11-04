@@ -79,7 +79,7 @@ doctrine_migrations:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: AppBundle\UserBundle\Entity\User
+    user_class: AppBundle\Entity\User
     service:
         user_manager: pugx_user_manager
     from_email:
@@ -88,28 +88,28 @@ fos_user:
 
 pugx_multi_user:
   users:
-    user_one:
+    customer:
         entity:
-          class: AppBundle\UserBundle\Entity\Customer
+          class: AppBundle\Entity\Customer
 #          factory:
         registration:
           form:
-            type: AppBundle\UserBundle\Form\Type\RegistrationCustomerFormType
+            type: AppBundle\Form\Type\RegistrationCustomerFormType
             name: fos_user_registration_form
             validation_groups:  [Registration, Default]
           template: AppBundle:RegistrationCustomer:register.html.twig
         profile:
           form:
-            type: AppBundle\UserBundle\Form\Type\ProfileUserOneFormType
+            type: AppBundle\Form\Type\ProfileUserOneFormType
             name: fos_user_profile_form
             validation_groups:  [Profile, Default]
-    user_two:
+    shop_owner:
         entity:
-          class: AppBundle\UserBundle\Entity\ShopOwner
+          class: AppBundle\Entity\ShopOwner
         registration:
           form:
-            type: AppBundle\UserBundle\Form\Type\RegistrationShopOwnerFormType
+            type: AppBundle\Form\Type\RegistrationShopOwnerFormType
           template: AppBundle:RegistrationShopOwner:register.html.twig
         profile:
           form:
-            type: Acme\UserBundle\Form\Type\ProfileUserTwoFormType
+            type: AppBundle\Form\Type\ProfileUserTwoFormType

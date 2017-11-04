@@ -6,17 +6,17 @@
  * Time: 12.38
  */
 
-namespace AppBundle\UserBundle\Form\Type;
+namespace AppBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class RegistrationShopOwnerFormType extends AbstractType
+class RegistrationCustomerFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //
+        $builder->remove('username');
     }
 
     public function getParent()
@@ -26,6 +26,7 @@ class RegistrationShopOwnerFormType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'shop_owner_registration';
+        return 'customer_registration';
     }
+
 }

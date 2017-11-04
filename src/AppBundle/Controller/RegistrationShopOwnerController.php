@@ -12,7 +12,7 @@ class RegistrationShopOwnerController extends Controller
     {
         return $this->container
             ->get('pugx_multi_user.registration_manager')
-            ->register('AppBundle\UserBundle\Entity\ShopOwner');
+            ->register('AppBundle\Entity\ShopOwner');
 
 //        return $this->render('AppBundle:RegistrationShopOwner:register.html.twig', array(
             // ...

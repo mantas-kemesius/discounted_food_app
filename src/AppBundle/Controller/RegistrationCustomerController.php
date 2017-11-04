@@ -11,7 +11,7 @@ class RegistrationCustomerController extends Controller
     {
         return $this->container
             ->get('pugx_multi_user.registration_manager')
-            ->register('AppBundle\UserBundle\Entity\Customer');
+            ->register('AppBundle\Entity\Customer');
 //        return $this->render('AppBundle:RegistrationCustomer:register.html.twig', array(
             // ...
 //        ));

@@ -31,4 +31,9 @@ class DefaultController extends Controller
         die;
     }
 
+    public function registerAction()
+    {
+        return $this->redirectToRoute('homepage');
+    }
+
 }
