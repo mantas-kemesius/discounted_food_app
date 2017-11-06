@@ -2,19 +2,19 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Customer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class RegistrationCustomerController extends Controller
+class RegistrationCustomerController extends AbstractRegistrationController
 {
-
-    public function registerAction()
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function registerAction(Request $request): Response
     {
-        return $this->container
-            ->get('pugx_multi_user.registration_manager')
-            ->register('AppBundle\Entity\Customer');
-//        return $this->render('AppBundle:RegistrationCustomer:register.html.twig', array(
-            // ...
-//        ));
+        return parent::register($request, Customer::class);
     }
-
 }

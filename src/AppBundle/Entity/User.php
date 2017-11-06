@@ -20,4 +20,13 @@ abstract class User extends BaseUser
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        parent::setUsername($email);
+    }
 }

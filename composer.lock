@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e7d72accca8cdc6e13bac76648c7407",
+    "content-hash": "63e062220eccc996e2441a43d0674036",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1742,7 +1742,7 @@
         },
         {
             "name": "pugx/multi-user-bundle",
-            "version": "v2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PUGX/PUGXMultiUserBundle.git",
@@ -1794,7 +1794,7 @@
                 "User management",
                 "multi user management"
             ],
-            "time": "2017-04-28T09:45:52+00:00"
+            "time": "2017-04-28 09:45:52"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2923,7 +2923,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pugx/multi-user-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -85,6 +85,9 @@ fos_user:
     from_email:
         address: "discounted@gmail.com"
         sender_name: "NFQ"
+    registration:
+        confirmation:
+            enabled: false
 
 pugx_multi_user:
   users:
@@ -95,13 +98,11 @@ pugx_multi_user:
         registration:
           form:
             type: AppBundle\Form\Type\RegistrationCustomerFormType
-            name: fos_user_registration_form
             validation_groups:  [Registration, Default]
           template: AppBundle:RegistrationCustomer:register.html.twig
         profile:
           form:
             type: AppBundle\Form\Type\ProfileUserOneFormType
-            name: fos_user_profile_form
             validation_groups:  [Profile, Default]
     shop_owner:
         entity:

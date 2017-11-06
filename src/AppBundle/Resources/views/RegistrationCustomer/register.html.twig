@@ -3,10 +3,10 @@
 {% block fos_user_content %}
     {% trans_default_domain 'FOSUserBundle' %}
 
-    <form action="{{ path('user_one_registration') }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
+    {{ form_start(form) }}
+        {{ form_row(form) }} {# Prints all fields #}
         <div>
             <input type="submit" value="{{ 'registration.submit'|trans }}" />
         </div>
-    </form>
+    {{ form_end(form) }}
 {% endblock fos_user_content %}
