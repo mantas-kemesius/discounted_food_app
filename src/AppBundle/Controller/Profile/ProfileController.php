@@ -3,7 +3,15 @@
 namespace AppBundle\Controller\Profile;
 
 use AppBundle\Entity\Address;
+use AppBundle\Service\MapGenerator;
 use Faker\Factory;
+use Http\Adapter\Guzzle6\Client;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,7 +43,22 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
+            $request = new GeocoderAddressRequest($address->getAddress());
+            $response = $geocoder->geocode($request);
+            $results = $response->getResults();
+
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($results as $result) {
+                $addressName = $result->getFormattedAddress();
+                $lat = $result->getGeometry()->getLocation()->getLatitude();
+                $lon = $result->getGeometry()->getLocation()->getLongitude();
+                $address->setAddress($addressName);
+                $address->setLatitude($lat);
+                $address->setLongitude($lon);
+
+            };
             $em->persist($address);
             $em->flush();
 
@@ -47,9 +70,14 @@ class ProfileController extends Controller
             return $this->redirectToRoute('profile_index', array('id' => $address->getId()));
         }
 
+        $mapGenerator = new MapGenerator();
+        $map = $mapGenerator->generateMap($addresses);
+
+
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
+            'map'  => $map
         ));
     }
 
