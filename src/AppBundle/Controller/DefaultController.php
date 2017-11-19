@@ -9,36 +9,31 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-  /**
-   * @Route("/", name="homepage")
-   */
-  public function indexAction(Request $request)
-  {
-      $em = $this->getDoctrine()->getManager();
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request)
+    {
+        return $this->render('default/index.html.twig');
+    }
 
-      $repository = $em->getRepository('AppBundle:Product');
-      $products = $repository->findAll();
+    /**
+     * @Route("/map", name="map")
+     */
+    public function mapAction(Request $request)
+    {
 
-      $repository = $em->getRepository('AppBundle:User');
-      $users = $repository->findAll();
+        return $this->render('Map/index.html.twig');
+    }
 
-      //var_dump($products);
-      //die;
-
-      return $this->render('default/index.html.twig',[
-          'products' =>$products,
-          'users' => $users,
-      ]);
-  }
-
-  /**
-   * @Route("/about", name="about")
-   */
-  public function aboutAction(Request $request)
-  {
-      // replace this example code with whatever you need
-      return $this->render('About/about.html.twig');
-  }
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('About/about.html.twig');
+    }
 
     /**
      * @Route("/faker", name="faker")
@@ -47,8 +42,9 @@ class DefaultController extends Controller
     {
         $faker = Factory::create();
 
-        for ($i = 0 ; $i <10 ; $i++ )
+        for ($i = 0; $i < 10; $i++) {
             echo $faker->name.'<br>';
+        }
 
         die;
     }

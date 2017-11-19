@@ -1,75 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Discounted food{% endblock %}
-
-{% block navbar %}
-    <ul class="nav navbar-nav menu__list">
-        <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
-        <li class=" menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
-        <li class="menu__item dropdown">
-            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b class="caret"></b></a>
-            <ul class="dropdown-menu agile_short_dropdown">
-                {% for user in users %}
-                    <li><a href="#">{{ user.companyName }}</a></li>
-                {% endfor %}
-            </ul>
-        </li>
-    </ul>
-{% endblock %}
-
-{% block index_page %}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h3>The Biggest <span>Sale</span></h3>
-                        <p>Special for today</p>
-                        <br>
-                        <button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-{% endblock %}
-
 {% block body %}
-    <h3 class="wthree_text_info">News <span>Feed</span></h3>
-    <div id="horizontalTab">
-        <div class = "row">
-            <div class = "col-md-12 col-sm-2 text-center">
-
+    <div id="page">
+    <nav class="gtco-nav" role="navigation">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div id="gtco-logo"><a href="index.html">Foodify.</a></div>
+                </div>
+                <div class="col-xs-8 text-center menu-1">
+                    <ul>
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li class="has-dropdown">
+                            <a href="services.html">Services</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Web Design</a></li>
+                                <li><a href="#">eCommerce</a></li>
+                                <li><a href="#">Branding</a></li>
+                                <li><a href="#">API</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Tools</a>
+                            <ul class="dropdown">
+                                <li><a href="#">HTML5</a></li>
+                                <li><a href="#">CSS3</a></li>
+                                <li><a href="#">Sass</a></li>
+                                <li><a href="#">jQuery</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 text-right hidden-xs menu-2">
+                    <ul>
+                        <li class="btn-cta"><a href="#"><span>Login</span></a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="resp-tabs-container">
-            {% for product in products %}
-                <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
-                    <div class="card">
-                        <img class="card-img-top" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-                        <div class="card-block text-center">
-                            <h4 class="card-title mt-3">{{ product.name }}</h4>
-                            <div class="meta">
-                                <a>{{ product.address.shopOwner.companyName }} Address: {{ product.address.address }}</a>
+
+        </div>
+    </nav>
+
+    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(images/img_bg_1.jpg);">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <div class="display-t">
+                        <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                            <div class="col-md-12">
+                                <div class="pull-center">
+                                    <h1 style="font-size: 28px;color:white;">Waffles are just pancakes with
+                                        abs.</h1>
+                                </div>
                             </div>
-                            <div class="card-text">
-                                {{ product.description }}
+                            <br><br>
+
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="exampleSelect1"
+                                                style="background-color: white;">
+                                            <option>City</option>
+                                            <option>Vilnius</option>
+                                            <option>Kaunas</option>
+                                            <option>Klaipėda</option>
+                                            <option>Šiauliai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                               aria-describedby="emailHelp" placeholder="Your favorite food..."
+                                               style="background-color: white;">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="{{ path('map') }}" class="btn btn-success">Search</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }} - {{ product.dateTo|date("h:m") }}</strong></small>
-                        </div>
-                        <div class="card-footer text-center">
-                            <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span class="item_price">${{ product.price }}</span></strong></small>
-                            <button style = "color:white;" class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">SHOW IN THE MAP</button>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-
-                <div class="clearfix"></div>
             </div>
         </div>
-    </div>
+    </header>
 {% endblock %}
